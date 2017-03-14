@@ -1,0 +1,1 @@
+C:\flex_sdk_4.6\bin\mxmlc -static-link-runtime-shared-libraries=true -compiler.library-path+=C:\flex_sdk_4.6\frameworks\libs ZeroClipboard.as -output=C:\Acalc_Server\acalc\static\swf\ZeroClipboard.swf

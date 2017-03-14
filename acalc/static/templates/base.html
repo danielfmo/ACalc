@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="keywords" content="acalc">
+	<meta name="description" content="Acalc Tool - Tool for A.Brito">
+	<title>{% block title %}{% endblock %}</title>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	{% include 'javascript.html' %}
+</head>
+<body>
+<div id="wrapper">
+	<div id="header">
+		<div id="logo">
+			<img src="/static/images/logoABRITO.png" width="325" height="80" alt="" />	
+		</div>
+		<div id="slogan">
+			<h1>A.Calc</h1>
+			<h2>Ferramenta de Cálculo</h2>
+		</div>
+	</div>
+	<div id="menu">
+		<ul>
+			<li class="first"><a href="/" class="{% block overviewActive %}{% endblock %}">Início</a></li>
+			<li>
+				<span class="opener">Rodas de Muda<b></b></span>
+				<ul>
+					<li><a href="/rodasdemuda/rollete" class="{% block rolleteActive %}{% endblock %}">Rollete</a></li>
+					<li><a href="/rodasdemuda/reishauer" class="{% block reishauerActive %}{% endblock %}">Reishauer</a></li>
+					<li><a href="/rodasdemuda/dressage" class="{% block dressageActive %}{% endblock %}">Reishauer Dressage</a></li>
+					<li><a href="/rodasdemuda/p251" class="{% block p251Active %}{% endblock %}">Pfauter 251</a></li>
+					<li><a href="/rodasdemuda/p630" class="{% block p630Active %}{% endblock %}">Pfauter 630</a></li>
+					<li><a href="/rodasdemuda/modul" class="{% block modulActive %}{% endblock %}">Modul</a></li>
+					<li><a href="/rodasdemuda/lindner" class="{% block lindnerActive %}{% endblock %}">Lindner</a></li>
+					<li><a href="/rodasdemuda/heckert" class="{% block heckertActive %}{% endblock %}">Heckert ZFWG 250</a></li>
+					<li><a href="/rodasdemuda/spiromatic" class="{% block spiromaticActive %}{% endblock %}">Spiromatic</a></li>
+				</ul>
+			</li>
+			<li class="last">
+				<span class="opener">Cotas de Verificação<b></b></span>
+				<ul>
+					<li><a href="/cotas/esferas" class="{% block esferasActive %}{% endblock %}">Esferas</a></li>
+					<li><a href="/cotas/ek_engrenagem" class="{% block ekengActive %}{% endblock %}">EK Engrenagem</a></li>
+					<li><a href="/cotas/ek_conjunto" class="{% block ekcongActive %}{% endblock %}">EK Conjunto Engrenagens</a></li>
+					<li><a href="/cotas/ek_semfim" class="{% block eksfActive %}{% endblock %}">EK Sem-fim</a></li>
+				</ul>
+			</li>
+			<!--
+			<li class="last">
+				<span class="opener">Cálculos<b></b></span>
+				<ul>
+					<li><a href="/calculos/spiromatic" class="{% block calcspiroActive %}{% endblock %}">Spiromatic</a></li>
+				</ul></li>
+			-->
+		</ul>
+		<br class="clearfix" />
+	</div>
+	<div id="page">
+		<div id="content">
+			{% if message %}
+				{% include 'error.html' %}
+			{% endif %}
+			
+			{% block content %}{% endblock %}
+		</div>
+		<br class="clearfix" />
+	</div>
+	<div id="page-bottom">
+		<br class="clearfix" />
+	</div>
+</div>
+<div id="footer">
+	Copyright (c) 2013 Daniel Oliveira
+</div>
+</body>
+</html>

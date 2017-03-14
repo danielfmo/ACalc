@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}Acalc Tool{% endblock %}
+{% block calcspiroActive %}active{% endblock %}
+
+{% block content %}
+	<div div class="box">
+		<h2 id = "name_filter">Espirais Cónicas</h2>	
+	</div>
+	<form method="GET" action="passo1">
+	<div class="box" id="content-box1">
+		<table>
+			<tr>
+				<th>Sentido da espiral do PINHÃO</th>
+				<td><div class="radio">
+						<input type="radio" id="radio_esq" name="radio1" value="ESQERDA" checked="checked"/><label for="radio_esq">Esquerda</label>
+						<input type="radio" id="radio_dir" name="radio1" value="DIREITA"  /><label for="radio_dir">Direita</label>
+				</div></td>
+			</tr>					
+			<tr>
+				<th>Módulo Aparente (mm)</th>
+				<td><input type="text" name="modulo" class = "required" value="{{ resultado['_m'] }}"></input></td>
+			</tr>	
+			<tr>
+				<th>Dentes do PINHÃO</th>
+				<td><input type="text" name="z1" class = "required" value="{{ resultado['_z1'] }}"></input></td>
+			</tr>
+			<tr>
+				<th>Dentes da COROA</th>
+				<td><input type="text" name="z2" class = "required" value="{{ resultado['_z2'] }}"></input></td>
+			</tr>	
+			<tr>
+				<th>Ângulo de Abertura</th>
+				<td><input type="text" name="e" class = "required" value="{{ resultado['_e'] }}"></input></td>
+			</tr>
+			<tr>
+				<th>Ângulo de Pressão</th>
+				<td><input type="text" name="alfa" class = "required" value="{{ resultado['_alfa'] }}"></input></td>
+			</tr>	
+		</table>	
+	</div>
+
+	<div class="box" id="content-box2">	
+		<input type="submit" value="Seguinte"></input>
+	</div>
+	</form>
+	<br class="clearfix" />	
+	{% include 'calc_result.html' %}
+	
+{% endblock %}

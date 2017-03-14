@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% block title %}Acalc Tool{% endblock %}
+{% block esferasActive %}active{% endblock %}
+
+{% block content %}
+	<div div class="box">
+		<h2 id = "name_filter">Esferas</h2>	
+	</div>
+	<form method="GET" action="result">
+	<div class="box" id="content-box1">
+		<table>
+			<tr>
+				<th>Artigo</th>
+				<td><input type="text" name="artigo" value="{{ artigo }}"></input></td>
+			</tr>
+			<tr>
+				<th>Tipo do dentado</th>
+				<td><div class="radio">
+						<input type="radio" id="radio_heli" name="radio1" value="HELICOIDAL" checked="checked"/><label for="radio_heli">Helicoidal</label>
+						<input type="radio" id="radio_recto" name="radio1" value="RECTO"  /><label for="radio_recto">Recto</label>
+				</div></td>
+			</tr>				
+			<tr>
+				<th>&nbsp;</th>
+				<td><div class="radio">
+						<input type="radio" id="radio_in" name="radio2" value="INTERIOR" checked="checked" /><label for="radio_in">Interior</label>
+						<input type="radio" id="radio_ex" name="radio2" value="EXTERIOR"/><label for="radio_ex">Exterior</label>
+				</div></td>
+			</tr>	
+			<tr>
+				<th>Ângulo da Hélice</th>
+				<td><input type="text" name="beta" class = "required"  value="{{ beta }}"/></td>
+			</tr>	
+			<tr>
+				<th>Ângulo de Pressão</th>
+				<td><input type="text" name="alfa" class = "required"  value="{{ alfa }}"/></td>
+			</tr>	
+			<tr>
+				<th>Módulo (mm)</th>
+				<td><input type="text" name="modulo" class = "required"  value="{{ modulo }}"/></td>
+			</tr>	
+			<tr>
+				<th>Esfera</th>
+				<td><input type="text" name="esfera" class = "required"  value="{{ esfera }}"/>
+				<input type="checkbox" id="a_auto" value="esfera"/><label for="a_auto">Auto</label></td>
+			</tr>	
+			<tr>
+				<th>Número de dentes</th>
+				<td><input type="text" name="n_dentes" class = "required" value="{{ n_dentes }}"/></td>
+			</tr>
+			<tr>
+				<th>Largura Dentado da RODA </th>
+				<td><input type="text" name="largura" class = "required" value="{{ largura }}"/></td>
+			</tr>			
+			<tr>
+				<th>Correcção</th>
+				<td><input type="text" name="correcao" value="{{ correcao }}"/></td>
+			</tr>	
+		</table>	
+	</div>
+
+	<div class="box" id="content-box2">	
+		<input type="submit" value="Calcular"></input>
+	</div>
+	</form>
+	<br class="clearfix" />	
+{% if result %}
+	<div class="box">
+		<h2>&nbsp;</h2>		
+		<h2>Resultado</h2>
+		<div class="v_filter">
+			<h4 id = "values_filter" style="display:none">{{ values }}</h4>
+		</div>
+		<table id="result-table" class="dataTable">
+			<thead>	
+				<tr>
+					<th>Atributo</th>
+					<th>Valor</th>
+				</tr>
+			</thead>
+			<tbody>	
+				<tr><td>Esfera</td>					<td>{{ result['a'] }}</td></tr>
+				<tr><td>Correção</td>				<td>{{ correcao }}</td></tr>
+				<tr><td>inv(teta)</td>				<td>{{'%0.6f'	|	format( result['inv_teta']) }}</td></tr>
+				<tr><td>teta</td>					<td>{{'%0.6f'	|	format( result['teta']) }}</td></tr>
+				<tr><td>Folga</td>					<td>{{'%0.6f'	|	format( result['erro']['folga']) }}</td>
+				<tr><td>Tolerância</td>				<td>{{'%0.6f'	|	format( result['erro']['t']) }}</td>	
+				<tr><td>U.erro de Divisão</td>		<td>{{'%0.6f'	|	format( result['erro']['udiv']) }}</td>
+				<tr><td>U.erro de Distorção</td>	<td>{{'%0.6f'	|	format( result['erro']['udist']) }}</td>
+				<tr><td>U. Folga</td>				<td>{{'%0.6f'	|	format( result['erro']['uf']) }}</td>
+				<tr><td>Erro de Distorção</td>		<td>{{'%0.6f'	|	format( result['erro']['edist']) }}</td>
+				<tr><td>Raio primitivo</td>			<td>{{'%0.6f'	|	format( result['R'])}}</td></tr>
+				<tr><td>Cota de talhagem (G)</td>	<td>{{'%0.6f'	|	format( result['G']) }}</td></tr>
+			</tbody>
+		</table>		
+	</div>	
+{% endif %}	
+{% endblock %}

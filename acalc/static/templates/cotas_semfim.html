@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+{% block title %}Acalc Tool{% endblock %}
+{% block efsfActive %}active{% endblock %}
+
+{% block content %}
+	<div div class="box">
+		<h2 id = "name_filter">Sem-fim</h2>	
+	</div>
+	<form method="GET" action="result">
+	<div class="box" id="content-box1">
+		<table>
+			<tr>
+				<th>Artigo</th>
+				<td><input type="text" name="artigo" value="{{ artigo }}"></input></td>
+			</tr>
+			<tr>
+				<th>Sentido da Hélice</th>
+				<td><div class="radio">
+						<input type="radio" id="radio_esq" name="radio1" value="ESQUERDA" checked="checked"/><label for="radio_esq">Esquerda</label>
+						<input type="radio" id="radio_dir" name="radio1" value="DIREITA"  /><label for="radio_dir">Direita</label>
+				</div></td>
+			</tr>					
+			<tr>
+				<th>Ângulo da Hélice</th>
+				<td><input type="text" name="betas" class = "required"  value="{{ beta }}"/>
+				<input type="checkbox" id="beta_auto" value="beta"/><label for="beta_auto">Auto</label></td>
+			</tr>	
+			<tr>
+				<th>Esfera</th>
+				<td><input type="text" name="esfera" class = "required"  value="{{ esfera }}"/>
+				<input type="checkbox" id="a_auto" value="esfera"/><label for="a_auto">Auto</label></td>
+			</tr>
+			<tr>
+				<th>Ângulo de Pressão Normal</th>
+				<td><input type="text" name="alfa" class = "required"  value="{{ alfa }}"/></td>
+			</tr>	
+			<tr>
+				<th>Módulo Axial</th>
+				<td><input type="text" name="modulo" class = "required"  value="{{ modulo }}"/></td>
+			</tr>	
+			<tr>
+				<th>N. entradas SEM-FIM</th>
+				<td><input type="text" name="n_dentes1" class = "required" value="{{ n_dentes1 }}"/></td>
+			</tr>
+			<tr>
+				<th>N. dentes RODA</th>
+				<td><input type="text" name="n_dentes2" class = "required" value="{{ n_dentes2 }}"/></td>
+			</tr>	
+			<tr>
+				<th>Largura Dentado da RODA </th>
+				<td><input type="text" name="largura" class = "required" value="{{ largura }}"/></td>
+			</tr>
+			<tr>
+				<th>Entre-Eixo de funcionamento</th>
+				<td><input type="text" name="eef" class = "required" value="{{ eef }}"/></td>
+			</tr>
+			{% if semfim %}
+			<tr>
+				<th>Cota de Verificação M</th>
+				<td><input type="text" name="ek1" value="{{ semfim['M'] }}"/>
+				<input type="checkbox" name="ek1_fix" id="ek1_fix" value="ON"/><label for="ek1_fix">Fixar</label></td>
+			</tr>
+			<tr>
+				<th>Cota de Verificação G</th>
+				<td><input type="text" name="ek2" value="{{ roda['G'] }}"/>
+				<input type="checkbox" name="ek2_fix" id="ek2_fix" value="ON"/><label for="ek2_fix">Fixar</label></td>
+			</tr>
+			{% endif %}			
+		</table>	
+	</div>
+
+	<div class="box" id="content-box2">	
+		<input type="submit" value="Calcular"></input>
+	</div>
+	</form>
+	<br class="clearfix" />	
+{% if semfim %}
+	<div class="box">
+	<div class="v_filter" style="display:none">
+		<h4 id = "values_filter">{{ values }}</h4>
+	</div>
+	<table id="result-table" class="dataTable">
+		<thead>	
+			<tr>
+				<th>Atributo</th>
+				<th>SEM-FIM</th>
+				<th>RODA</th>
+			</tr>
+		</thead>
+		<tbody>	
+			<tr><td>Sentido do Dentado</td>	<td>{{ semfim['sentido'] }}</td>
+											<td>{{ roda['sentido'] }}</td></tr>
+			<tr><td><strong>Cotas</strong></td><td><strong>{{'%0.6f'	|	format( semfim['M']) }}</strong></td>
+											<td><strong>{{'%0.6f'	|	format( roda['G']) }}</strong></td></tr>
+			<tr><td>Esfera</td>				<td>{{ esfera }}</td>
+											<td>{{ esfera }}</td></tr>
+			<tr><td>Folga</td>				<td>{{'%0.6f'	|	format( semfim['erro']['folga']) }}</td>
+											<td>{{'%0.6f'	|	format( roda['erro']['folga']) }}</td></tr>
+			<tr><td>Tolerância</td>			<td>{{'%0.6f'	|	format( semfim['erro']['t']) }}</td>	
+											<td>{{'%0.6f'	|	format( roda['erro']['t']) }}</td></tr>
+			<tr><td>U.erro de Divisão</td>	<td>{{'%0.6f'	|	format( semfim['erro']['udiv']) }}</td>
+											<td>{{'%0.6f'	|	format( roda['erro']['udiv']) }}</td></tr>
+			<tr><td>U.erro de Distorção</td><td>{{'%0.6f'	|	format( semfim['erro']['udist']) }}</td>
+											<td>{{'%0.6f'	|	format( roda['erro']['udist']) }}</td></tr>
+			<tr><td>U. Folga</td>			<td>{{'%0.6f'	|	format( semfim['erro']['uf']) }}</td>
+											<td>{{'%0.6f'	|	format( roda['erro']['uf']) }}</td></tr>
+			<tr><td>Erro de Distorção</td>	<td>{{'%0.6f'	|	format( semfim['erro']['edist']) }}</td>
+											<td>{{'%0.6f'	|	format( roda['erro']['edist']) }}</td></tr>
+			<tr><td>Cota A</td>				<td>{{'%0.6f'	|	format( semfim['cotas']['a']) }}</td>
+											<td>{{'%0.6f'	|	format( roda['cotas']['a']) }}</td></tr>
+			<tr><td>Cota B</td>				<td>{{'%0.6f'	|	format( semfim['cotas']['b']) }}</td>
+											<td>{{'%0.6f'	|	format( roda['cotas']['b']) }}</td></tr>
+			<tr><td>Cota C</td>				<td>{{'%0.6f'	|	format( semfim['cotas']['c']) }}</td>
+											<td>{{'%0.6f'	|	format( roda['cotas']['c']) }}</td></tr>
+			<tr><td>Cota D</td>				<td>{{'%0.6f'	|	format( semfim['cotas']['d']) }}</td>
+											<td>{{'%0.6f'	|	format( roda['cotas']['d']) }}</td></tr>
+			<tr><td>Cota E</td>				<td>{{'%0.6f'	|	format( semfim['cotas']['e']) }}</td>
+											<td>{{'%0.6f'	|	format( roda['cotas']['e']) }}</td></tr>
+			<tr><td>Cota F</td>				<td>{{'%0.6f'	|	format( semfim['cotas']['f']) }}</td>
+											<td> --- </td></tr>
+			<tr><td>Cota dp</td>			<td>{{'%0.6f'	|	format( semfim['cotas']['dp']) }}</td>
+											<td>{{'%0.6f'	|	format( roda['cotas']['dp']) }}</td></tr>
+		</tbody>
+	</table>		
+</div>	
+{% endif %}	
+{% endblock %}

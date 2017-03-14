@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+{% block title %}Acalc Tool{% endblock %}
+{% block ekcongActive %}active{% endblock %}
+
+{% block content %}
+	<div div class="box">
+		<h2 id = "name_filter">EK de conjunto</h2>	
+	</div>
+	<form method="GET" action="result">
+	<div class="box" id="content-box1">
+		<table>
+			<tr>
+				<th>Artigo</th>
+				<td><input type="text" name="artigo" value="{{ artigo }}"></input></td>
+			</tr>
+			<tr>
+				<th>Tipo do dentado</th>
+				<td><div class="radio">
+						<input type="radio" id="radio_heli" name="radio1" value="HELICOIDAL" checked="checked"/><label for="radio_heli">Helicoidal</label>
+						<input type="radio" id="radio_recto" name="radio1" value="RECTO"  /><label for="radio_recto">Recto</label>
+				</div></td>
+			</tr>				
+			<tr>
+				<th>&nbsp;</th>
+				<td><div class="radio">
+						<input type="radio" id="radio_esq" name="radio2" value="ESQUERDA" checked="checked" /><label for="radio_esq">Esquerda</label>
+						<input type="radio" id="radio_dir" name="radio2" value="DIREITA"/><label for="radio_dir">Direita</label>
+				</div></td>
+			</tr>
+			<tr>
+				<th>Entre-eixo de funcionamento</th>
+				<td><input type="text" name="eef" class = "required" value="{{ eef }}"/>
+				<input type="checkbox" id="eef_auto" value="eef_auto"/><label for="eef_auto">Auto</label></td>
+			</tr>	
+			<tr>
+				<th>Nº dentes do EK CARRETO</th>
+				<td><input type="text" name="dentes_ek1" class = "required" value="{{ dentes_ek1 }}"/>
+				<input type="checkbox" id="dentes_ek1_auto" value="dentes_ek1"/><label for="dentes_ek1_auto">Auto</label></td>
+			</tr>
+			<tr>
+				<th>Nº dentes do EK RODA</th>
+				<td><input type="text" name="dentes_ek2" class = "required" value="{{ dentes_ek2 }}"/>
+				<input type="checkbox" id="dentes_ek2_auto" value="dentes_ek2"/><label for="dentes_ek2_auto">Auto</label></td>
+			</tr>			
+			<tr>
+				<th>Ângulo da Hélice</th>
+				<td><input type="text" name="beta" class = "required"  value="{{ beta }}"/></td>
+			</tr>	
+			<tr>
+				<th>Ângulo de Pressão</th>
+				<td><input type="text" name="alfa" class = "required" value="{{ alfa }}"/></td>
+			</tr>	
+			<tr>
+				<th>Módulo (mm)</th>
+				<td><input type="text" name="modulo" class = "required" value="{{ modulo }}"/></td>
+			</tr>		
+			<tr>
+				<th>N. Dentes CARRETO</th>
+				<td><input type="text" name="n_dentes1" class = "required" value="{{ n_dentes1 }}"/></td>
+			</tr>	
+			<tr>
+				<th>N. Dentes RODA</th>
+				<td><input type="text" name="n_dentes2" class = "required" value="{{ n_dentes2 }}"/></td>
+			</tr>	
+			<tr>
+				<th>Largura do dentado</th>
+				<td><input type="text" name="largura" class = "required" value="{{ largura }}"/></td>
+			</tr>	
+			{% if carreto %}
+			<tr>
+				<th>EK CARRETO</th>
+				<td><input type="text" name="ek1" value="{{ carreto['EK'] }}"/>
+				<input type="checkbox" name="ek1_fix" id="ek1_fix" value="ON"/><label for="ek1_fix">Fixar</label></td>
+			</tr>
+			<tr>
+				<th>EK RODA</th>
+				<td><input type="text" name="ek2" value="{{ roda['EK'] }}"/>
+				<input type="checkbox" name="ek2_fix" id="ek2_fix" value="ON"/><label for="ek2_fix">Fixar</label></td>
+			</tr>
+			{% endif %}
+		</table>	
+	</div>
+
+	<div class="box" id="content-box2">	
+		<input type="submit" value="Calcular"></input>
+	</div>
+	</form>
+	<br class="clearfix" />	
+	
+{% if carreto %}
+	<div class="box">
+	<div class="v_filter" style="display:none">
+		<h4 id = "values_filter">{{ values }}</h4>
+	</div>
+	<table id="result-table" class="dataTable">
+		<thead>	
+			<tr>
+				<th>Atributo</th>
+				<th>CARRETO</th>
+				<th>RODA</th>
+			</tr>
+		</thead>
+		<tbody>	
+			<tr><td>Sentido do Dentado</td>	<td>{{ carreto['sentido'] }}</td>
+											<td>{{ roda['sentido'] }}</td></tr>
+			<tr><td><strong>EK</strong></td><td><strong>{{'%0.6f'	|	format( carreto['EK']) }}</strong></td>
+											<td><strong>{{'%0.6f'	|	format( roda['EK']) }}</strong></td></tr>
+			<tr><td>N. dentes EK</td>		<td>{{ carreto['dentes_ek'] }}</td>
+											<td>{{ roda['dentes_ek'] }}</td></tr>
+			<tr><td>Diâmetro Exterior</td>	<td>{{'%0.6f'	|	format( carreto['de']) }}</td>
+											<td>{{'%0.6f'	|	format( roda['de']) }}</td></tr>
+			<tr><td>Folga</td>				<td>{{'%0.6f'	|	format( carreto['erro']['folga']) }}</td>
+											<td>{{'%0.6f'	|	format( roda['erro']['folga']) }}</td></tr>
+			<tr><td>Tolerância</td>			<td>{{'%0.6f'	|	format( carreto['erro']['t']) }}</td>	
+											<td>{{'%0.6f'	|	format( roda['erro']['t']) }}</td></tr>
+			<tr><td>Factor de Correção</td>	<td>{{'%0.6f'	|	format( carreto['erro']['fc']) }}</td>
+											<td>{{'%0.6f'	|	format( roda['erro']['fc']) }}</td></tr>
+			<tr><td>U.erro de Divisão</td>	<td>{{'%0.6f'	|	format( carreto['erro']['udiv']) }}</td>
+											<td>{{'%0.6f'	|	format( roda['erro']['udiv']) }}</td></tr>
+			<tr><td>U.erro de Distorção</td><td>{{'%0.6f'	|	format( carreto['erro']['udist']) }}</td>
+											<td>{{'%0.6f'	|	format( roda['erro']['udist']) }}</td></tr>
+			<tr><td>U. Folga</td>			<td>{{'%0.6f'	|	format( carreto['erro']['uf']) }}</td>
+											<td>{{'%0.6f'	|	format( roda['erro']['uf']) }}</td></tr>
+			<tr><td>Erro de Distorção</td>	<td>{{'%0.6f'	|	format( carreto['erro']['edist']) }}</td>
+											<td>{{'%0.6f'	|	format( roda['erro']['edist']) }}</td></tr>
+		</tbody>
+	</table>		
+</div>	
+{% endif %}
+	
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Acalc Tool{% endblock %}
+{% block spiromaticActive %}active{% endblock %}
+
+{% block content %}
+	<div div class="box">
+		<h2 id = "name_filter">Spiromatic</h2>	
+	</div>
+	<form method="GET" action="result">
+	<div class="box" id="content-box1">
+		<table>
+			<tr>
+				<th>Artigo</th>
+				<td><input type="text" name="artigo" value="{{ artigo }}"></input></td>
+			</tr>
+			<tr>
+				<th>N. rodas de muda</th>
+				<td><div class="radio">
+						<input type="radio" id="radio1" name="radio" value="6rodas" checked="checked" /><label for="radio1">6 rodas</label>
+						<input type="radio" id="radio2" name="radio" value="4rodas"/><label for="radio2">4 rodas</label>
+				</div></td>
+			</tr>
+			<tr>
+				<th>W</th>
+				<td><input type="text" name="razao" class = "required" value="{{ razao }}"></input></td>
+			</tr>
+		</table>	
+	</div>
+
+	<div class="box" id="content-box2">	
+		<input type="submit" value="Calcular"></input>
+	</div>
+	</form>
+	<br class="clearfix" />	
+	{% include 'rodas_result6.html' %}
+	
+{% endblock %}

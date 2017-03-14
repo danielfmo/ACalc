@@ -1,0 +1,195 @@
+<link href="/static/css/style.css" 					rel="stylesheet" 		type="text/css">
+<link href="/static/css/jquery-ui-1.10.1.css" 		rel="stylesheet" 		type="text/css">
+<link href="/static/css/dataTables_flat.css" 		rel="stylesheet" 		type="text/css">
+<link href="/static/css/TableTools.css" 			rel="stylesheet"	 	type="text/css">
+
+<script type="text/javascript" src="/static/js/jquery-1.9.1.min.js"			></script>
+<script type="text/javascript" src="/static/js/jquery-ui-1.10.1.min.js"		></script>
+<script type="text/javascript" src="/static/js/jquery.dataTables.min.js"	></script>
+<script type="text/javascript" src="/static/js/TableTools.min.js"			></script>
+<script type="text/javascript" src="/static/js/ZeroClipboard.js"			></script>
+<script type="text/javascript" src="/static/js/jquery.dropotron-1.2.js"		></script>
+
+<script type="text/javascript">
+	$(document).ready(function() 
+		{
+			// Funções auxiliares
+			function getDate()
+			{
+				var today = new Date();
+				var dd = today.getDate();
+				var mm = today.getMonth()+1; //January is 0!
+				var yyyy = today.getFullYear();
+				if(dd<10){dd='0'+dd} if(mm<10){mm='0'+mm} today = yyyy+mm+dd;
+				
+				return today;
+			}
+			function getName()
+			{
+				var name = $("#name_filter").text();
+				
+				return name;
+			}
+			function getValues()
+			{
+				var values = $("#values_filter").text();
+				
+				return values;
+			}
+			function getFileName()
+			{
+				var docDate = getDate();
+				var filter = getName();
+				var fileName = docDate+"_"+filter;
+
+				return fileName;
+			}	
+			
+			// MENU
+			$('#menu > ul').dropotron(
+			{
+				mode: 'fade',
+				globalOffsetY: 11,
+				offsetY: -15
+			} );
+
+			//checkbox
+			$( "input[type=checkbox]" ).button().css({ width: '50px', 'float':'left'});
+			
+			$( "input[id=a_auto]:checkbox" ).change(function() {
+				if ($(this).is(':checked')) {
+					$("input[name=esfera]").attr("disabled", "disabled").addClass("ui-state-disabled");
+					$("input[name=esfera]").val(0);
+				} else {
+					$("input[name=esfera]").removeAttr("disabled").removeClass("ui-state-disabled");
+				}				
+			});	
+			
+			$( "input[id=beta_auto]:checkbox" ).change(function() {
+				if ($(this).is(':checked')) {
+					$("input[name=betas]").attr("disabled", "disabled").addClass("ui-state-disabled");
+					$("input[name=betas]").val(0);
+				} else {
+					$("input[name=betas]").removeAttr("disabled").removeClass("ui-state-disabled");
+				}				
+			});
+			
+			$( "input[id=dentes_ek1_auto]:checkbox" ).change(function() {
+				if ($(this).is(':checked')) {
+					$("input[name=dentes_ek1]").attr("disabled", "disabled").addClass("ui-state-disabled");
+					$("input[name=dentes_ek1]").val(0);
+				} else {
+					$("input[name=dentes_ek1]").removeAttr("disabled").removeClass("ui-state-disabled");
+				}				
+			});
+						
+			$( "input[id=dentes_ek2_auto]:checkbox" ).change(function() {
+				if ($(this).is(':checked')) {
+					$("input[name=dentes_ek2]").attr("disabled", "disabled").addClass("ui-state-disabled");
+					$("input[name=dentes_ek2]").val(0);
+				} else {
+					$("input[name=dentes_ek2]").removeAttr("disabled").removeClass("ui-state-disabled");
+				}				
+			});
+			
+			$( "input[id=eef_auto]:checkbox" ).change(function() {
+				if ($(this).is(':checked')) {
+					$("input[name=eef]").attr("disabled", "disabled").addClass("ui-state-disabled");
+					$("input[name=eef]").val(0);
+				} else {
+					$("input[name=eef]").removeAttr("disabled").removeClass("ui-state-disabled");
+				}				
+			});
+
+			$( "input[id=ek1_fix]:checkbox" ).change(function() {
+				if ($(this).is(':checked')) {
+					$("input[name=ek1]").addClass("ui-state-disabled");
+				} else {
+					$("input[name=ek1]").removeClass("ui-state-disabled");
+				}				
+			});
+
+			$( "input[id=ek2_fix]:checkbox" ).change(function() {
+				if ($(this).is(':checked')) {
+					$("input[name=ek2]").addClass("ui-state-disabled");
+				} else {
+					$("input[name=ek2]").removeClass("ui-state-disabled");
+				}				
+			});
+						
+			//submit
+			$( "input[type=submit]" ).button().attr("disabled", "disabled").addClass("ui-state-disabled");
+			
+			//input text
+			$( "input[type=text]" ).button().off('mousedown').css({ width: '100px', 'float':'left'});
+			
+			$( "input[type=text]" ).change(function() {
+				var isFormValid = true;
+				$( ".required:input[type=text]" ).each(function(index, value) {
+					if ( !$.trim($(value).val()).match(/[0-9]+/) ) { 
+						isFormValid = false;
+					}	
+				});
+				if (isFormValid) {
+					$("input[type=submit]").removeAttr("disabled").removeClass("ui-state-disabled");
+				} else {
+					$("input[type=submit]").attr("disabled", "disabled").addClass("ui-state-disabled");
+				}
+			});
+		
+			// radio
+			$( ".radio" ).buttonset();
+	
+			$( ".radio" ).click(function() {
+				if ( $('input[name=radio]:radio:checked').val() == 'navalhao'  ||  $('input[name=radio1]:radio:checked').val() == 'RECTO'){
+					$("input[name=beta]").attr("disabled", "disabled").addClass("ui-state-disabled");
+					$("input[name=beta]").val(0);
+				} else {
+					$("input[name=beta]").removeAttr("disabled").removeClass("ui-state-disabled");
+				}				
+			});
+			
+			// table
+			$('#result-table').dataTable(
+			{
+				"sDom": 'rtl<"bottom"T>',
+				"aaSorting": 		[[ 1, "asc" ]],
+				"bPaginate": 		false,
+				"bLengthChange": 	true,
+				"bFilter": 			false,
+				"bSort": 			false,
+				"bSortCellsTop":	false,
+				"bInfo": 			false,
+				"bJQueryUI": 		true,
+				"bAutoWidth": 		true,
+				"bRetrieve": 		true,	
+				"oTableTools": 		{
+					"sSwfPath": "/static/swf/ZeroClipboard.swf",
+					"aButtons": 
+					[
+						{
+							"sExtends": "pdf",
+							"sTitle": getName(),
+							"sPdfMessage": getValues(),
+							"sPdfOrientation": "portrait",
+							"fnClick": function( nButton, oConfig, flash )
+							{
+								customName = getFileName()+".pdf";
+								flash.setFileName( customName );
+								this.fnSetText( flash,
+									"title:"+ this.fnGetTitle(oConfig) +"\n"+
+									"message:"+ oConfig.sPdfMessage +"\n"+ 
+									"colWidth:"+ this.fnCalcColRatios(oConfig) +"\n"+
+									"orientation:"+ oConfig.sPdfOrientation +"\n"+
+									"size:"+ oConfig.sPdfSize +"\n"+
+									"--/TableToolsOpts--\n" +
+									this.fnGetTableData(oConfig)
+								);
+							}
+						}
+					]
+				}
+			} );
+			
+		});
+</script>

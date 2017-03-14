@@ -1,0 +1,96 @@
+<div class="box">
+	<h2>&nbsp;</h2>		
+	<h2>Resultado</h2>
+	<table>
+		<thead>	
+			<tr>
+				<th>Sentido</th>
+				<th>Módulo</th>
+				<th>Z1</th>
+				<th>Z2</th>
+				<th>e</th>
+				<th>alfa</th>
+			</tr>
+		</thead>
+		<tbody>	
+			<tr>
+				<td>{{ resultado['_sentido'] }}</td>
+				<td>{{ resultado['_m'] }}</td>
+				<td>{{ resultado['_z1'] }}</td>
+				<td>{{ resultado['_z2'] }}</td>
+				<td>{{ resultado['_e'] }}</td>
+				<td>{{ resultado['_alfa'] }}</td>
+			</tr>
+		</tbody>
+	</table>
+	<table>
+		<thead>	
+			<tr>
+				<th>D1</th>
+				<th>D2</th>
+				<th>Zp</th>
+				<th>S1</th>
+				<th>S2</th>
+				<th>R</th>
+				<th>b</th>
+			</tr>
+		</thead>
+		<tbody>	
+			<tr>
+				<td>{{ resultado['_D1'] }}</td>
+				<td>{{ resultado['_D2'] }}</td>
+				<td>{{ resultado['_zp'] }}</td>
+				<td>{{ resultado['_S1'] }}</td>
+				<td>{{ resultado['_S2'] }}</td>
+				<td>{{ resultado['_R'] }}</td>
+				<td>{{ resultado['_b'] }}</td>
+			</tr>
+		</tbody>
+	</table>	
+</div>	
+
+
+
+
+
+
+
+
+
+
+
+
+{% if values %}
+<div class="box">
+	<h2>&nbsp;</h2>		
+	<h2>Resultado</h2>
+	<div class="v_filter">
+		<h4 id = "values_filter">{{ values }}</h4>
+	</div>
+	<table id="result-table" class="dataTable">
+		<thead>	
+			<tr>
+				<th>Razão Mecânica</th>
+				<th>Erro</th>
+				<th>A</th>
+				<th>B</th>
+				<th>C</th>
+				<th>D</th>
+			</tr>
+		</thead>
+		<tbody>	
+			{% for result in resultados %}
+			<tr>
+				<td>{{'%0.12f'	|	format(result['razaom']|float)}}</td>
+				<td>{{'%0.12f'	|	format(result['erro']|float)}}</td>
+				<td>{{'%d'		|	format(result['A']|int)}}</td>
+				<td>{{'%d'		|	format(result['B']|int)}}</td>
+				<td>{{'%d'		|	format(result['C']|int)}}</td>
+				<td>{{'%d'		|	format(result['D']|int)}}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>		
+</div>	
+
+{% endif %}

@@ -1,0 +1,34 @@
+{% if values %}
+<div class="box">
+	<h2>&nbsp;</h2>		
+	<h2>Resultado</h2>
+	<div class="v_filter" style="display:none">
+		<h4 id = "values_filter">{{ values }}</h4>
+	</div>
+	<table id="result-table" class="dataTable">
+		<thead>	
+			<tr>
+				<th>Razão Mecânica</th>
+				<th>Erro</th>
+				<th>A</th>
+				<th>B</th>
+				<th>C</th>
+				<th>D</th>
+			</tr>
+		</thead>
+		<tbody>	
+			{% for result in resultados %}
+			<tr>
+				<td>{{'%0.12f'	|	format(result['razaom']|float)}}</td>
+				<td>{{'%0.12f'	|	format(result['erro']|float)}}</td>
+				<td>{{'%d'		|	format(result['A']|int)}}</td>
+				<td>{{'%d'		|	format(result['B']|int)}}</td>
+				<td>{{'%d'		|	format(result['C']|int)}}</td>
+				<td>{{'%d'		|	format(result['D']|int)}}</td>
+			</tr>
+			{% endfor %}			
+		</tbody>
+	</table>		
+</div>	
+
+{% endif %}
