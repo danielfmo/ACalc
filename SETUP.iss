@@ -28,8 +28,8 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; 
 
 [Files]
-Source: "C:\Acalc_Server\build\exe.win32-3.3\ACalc.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Acalc_Server\build\exe.win32-3.3\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "C:\Users\Daniel\Dropbox\projectos\GitHub\ACalc\build\exe.win-amd64-3.6\ACalc.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\Daniel\Dropbox\projectos\GitHub\ACalc\build\exe.win-amd64-3.6\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "version.dat"; DestDir: "{tmp}"; Flags: dontcopy
 Source: "build.dat"; DestDir: "{tmp}"; Flags: dontcopy
 

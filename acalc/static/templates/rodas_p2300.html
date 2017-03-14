@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}Acalc Tool{% endblock %}
+{% block p2300Active %}active{% endblock %}
+
+{% block content %}
+	<div div class="box">
+		<h2 id = "name_filter">Pfauter 2300</h2>	
+	</div>
+	<form method="GET" action="result">
+	<div class="box" id="content-box1">
+		<table>
+			<tr>
+				<th>Artigo</th>
+				<td><input type="text" name="artigo" value="{{ artigo }}"></input></td>
+			</tr>
+			<tr>
+				<th>Modo</th>
+				<td><div class="radio">
+						<input type="radio" id="radio1" name="radio" value="diferencial" checked="checked" /><label for="radio1">Diferêncial</label>
+						<input type="radio" id="radio2" name="radio" value="tangencial"/><label for="radio2">Tangêncial</label>
+						<input type="radio" id="radio3" name="radio" value="navalhao"/><label for="radio3">Navalhão</label>
+				</div></td>
+			</tr>
+			<tr>
+				<th>Módulo (mm)</th>
+				<td><input type="text" name="modulo" class = "required" value="{{ modulo }}"></input></td>
+			</tr>	
+			<tr>
+				<th>Beta (º)</th>
+				<td><input type="text" name="beta" class = "required" value="{{ beta }}"></input></td>
+			</tr>	
+			<tr>
+				<th>Nº Entradas</th>
+				<td><input type="text" name="entradas" class = "required" value="{{ entradas }}"></input></td>
+			</tr>		
+		</table>	
+	</div>
+
+	<div class="box" id="content-box2">	
+		<input type="submit" value="Calcular"></input>
+	</div>
+	</form>
+	<br class="clearfix" />	
+	{% include 'rodas_result.html' %}
+	
+{% endblock %}

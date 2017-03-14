@@ -1,14 +1,17 @@
 from distutils.core import setup
 from distutils.extension import Extension
 from Cython.Distutils import build_ext
+from Cython.Build import cythonize
 
-ext_modules = [Extension("rodasdemuda", ["rodasdemuda.pyx"], language='c++' )]
+extensions = [Extension("rodasdemuda", ["rodasdemuda.pyx"], language='c++' )]
+
+#extensions = cythonize(extensions)
 
 setup(
-  name = 'ACalc',
-  version = '0.1',
+  name = 'rodasDeMuda',
+  version = '1.1',
   description = 'test library', 
   author = "Daniel Oliveira", 
   cmdclass = {'build_ext': build_ext},
-  ext_modules = ext_modules
+  ext_modules = extensions
 )

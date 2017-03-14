@@ -409,7 +409,96 @@ class Pfauter630 (object):
 			result = result[0:12]	
 		
 		return result
-				
+
+# modulo, entradas, modo ou beta
+class Pfauter630 (object):
+	def __init__ (self, **kwargs) :
+		self._name 			= 'pfauter2300'
+		self._modelo 		= 'P2300'
+		self._conj_rodas 	= (20,21,22,23,24,25,26,26,27,28,29,
+									30,31,32,33,34,35,36,37,38,39,
+									40,41,42,43,44,45,46,47,48,49,
+									50,51,52,53,54,54,55,56,57,58,59,
+									60,61,62,63,64,65,66,67,68,69,
+									70,71,72,73,74,75,76,77,78,79,
+									80,80,82,84,85,85,90,90)
+		self._m 				= kwargs.get('modulo', None)
+		self._beta 			= kwargs.get('beta', 0)
+		self._beta 			= radians(six2dec(self._beta))
+		self._zO				= kwargs.get('entradas', None)
+		self._modo 			= str(kwargs.get('modo', None)).upper()
+		if self._modo == 'DIFERENCIAL':
+			self._razao = (12.732395*sin(self._beta))/(self._m*self._zO)	#modulo, beta, entradas
+		elif self._modo == 'TANGENCIAL':
+			self._razao = (8*cos(self._beta))/(3*self._m*self._zO)			#modulo, beta, entradas
+		elif self._modo == 'NAVALHAO':
+			self._razao = 8/(3*self._m*self._zO)									#modulo, beta, entradas, angulo a 0 para navalhão
+		else :
+			self._razao = None
+			
+	def limites(self, *conjunto):
+		if len(conjunto) != 4:
+			return None
+		else :
+			A = conjunto[0]
+			B = conjunto[1]
+			C = conjunto[2]
+			D = conjunto[3]
+
+			MAX_A	=	51	
+			MAX_D	=	85	
+			
+			# From P630
+			MAX_AB	=	107
+			MAX_CD	=	160
+			MIN_AB	=	50
+			MIN_CD	=	B+31 if B>=49 else 80	# C+D >= 80 and C+D>=B+31
+
+			if A+B>=MIN_AB and A+B<=MAX_AB and C+D>=MIN_CD and C+D<=MAX_CD and A<=MAX_A and D<=MAX_D:
+				return True
+			else :
+				return False
+			
+	def rodasdemuda(self, float erro = 0.001):
+		cdef float razaom, err
+		razaom = 0
+		err = 0
+		
+		cdef int lrodas, a, b, c, d
+		a = 0
+		b = 0
+		c = 0
+		d = 0
+		lrodas = len (self._conj_rodas)
+		
+		cdef vector[float] rodas = self._conj_rodas
+
+		result = []
+
+		for a from 0 <= a < lrodas:
+			for b from 0 <= b < lrodas:
+				for c from 0 <= c < lrodas:
+					for d from 0 <= d < lrodas:
+						razaom=rodas[a]/rodas[b]*rodas[c]/rodas[d]
+						err = fabs (self._razao - razaom)
+						if err<=erro and (a!=b and a!=c and a!=d and b!=c and b!=d and c!=d):
+							if self.limites(rodas[a], rodas[b], rodas[c], rodas[d]):
+								result.append(dict (A=rodas[a], B=rodas[b], C=rodas[c], D=rodas[d], erro=err, razaom=razaom))
+
+		#remove resultados com conjuntos duplicados devido a existirem rodas de muda iguais
+		keyfunc = lambda d: (d['A'], d['B'], d['C'], d['D'])
+		giter = groupby(sorted(result, key=keyfunc), keyfunc)
+		result = [next(g[1]) for g in giter]
+		
+		#ordena os resultados pelo erro, ascendente
+		result = sorted(result, key=itemgetter('erro'))
+		
+		#limita o numero de resultados a 12
+		if len(result) > 12:	
+			result = result[0:12]	
+		
+		return result
+		
 # modulo, entradas, modo ou beta
 class Modul (object):
 	def __init__ (self, **kwargs) :

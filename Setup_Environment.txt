@@ -1,22 +1,23 @@
 ##########################################
 ## Seting up the development enviroment:
-##########################################
-
-1. Requirments:
-	- Python 3.3:
-		http://www.python.org/download/releases/
-		add C:/Python to system variables (set PYTHONPATH=%PYTHONPATH%;C:\Python)
-		
-	- Python modules:
-		http://www.lfd.uci.edu/~gohlke/pythonlibs/
-		Copy distutils.cfg and cygwinccompiler.py to C:\Python\Lib\distutils
-		.CherryPY
-		 (https://bitbucket.org/cherrypy/cherrypy/downloads)
-			\Python\Scripts\easy_install-3.3.exe cherrypy
-		.Cython
-		.distribute
-		
-	- minGW
-		http://sourceforge.net/projects/mingw/files/
-		add add C:/MinGW/bin to system variables
-	
+##########################################		
+Install Python libs with "pip install {lib_name}":
+CherryPy (10.2.1)
+cx-Freeze (5.0.1)
+Cython (0.25.2)
+Jinja2 (2.9.5)
+ 
+ 
+ Externals:
+  . inno setup -> create install package
+  
+ Build Cython module:
+  -> go to "ACalc\acalc\tools";
+  -> run "python setup.py build_ext --inplace --force"
+  
+ Build delivery (with cx_Freeze):
+  -> go to "Acalc";
+  -> run "python setup.py build"
+  
+ Create package (inno setup)
+   
