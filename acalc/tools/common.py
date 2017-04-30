@@ -16,7 +16,7 @@ def render_template(template, **kwargs):
     
 def six2dec(angle):
 	import re
-	pat = r"^(\d+)[º ](\d+)[' ]([\d.]*)['']?"
+	pat = r"^(\d+)[\s](\d+)[' ]([\d.]*)['']?"
 	angle_dec = 0 
 	r = re.compile(pat)
 	angle_match = r.match(angle)

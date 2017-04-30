@@ -511,9 +511,9 @@ class Modul (object):
 		self._zO			= kwargs.get('entradas', None)
 		self._modo 			= str(kwargs.get('modo', None)).upper()
 		if self._modo == 'DIFERENCIAL':
-			self._razao = (6*sin(self._beta*pi/180))/(self._m*self._zO)		#modulo, beta, entradas
+			self._razao = (6*sin(self._beta))/(self._m*self._zO)		#modulo, beta, entradas
 		elif self._modo == 'TANGENCIAL':
-			self._razao = (3*cos(self._beta*pi/180))/(self._m*self._zO)	
+			self._razao = (3*cos(self._beta))/(self._m*self._zO)	
 		elif self._modo == 'NAVALHAO':
 			self._razao = 3/(self._m*self._zO)								#modulo, entradas
 		else :
