@@ -7,7 +7,13 @@ import os
 import logging
 
 from jinja2 import Environment, FileSystemLoader
-jinja_env = Environment(loader=FileSystemLoader(os.path.join("acalc", "static", "templates")))
+
+if os.path.isdir("/home/danielfmo/ACalc/acalc/static/templates"):
+	template_path = os.path.join("/home/danielfmo/ACalc/acalc/static/templates")
+else :
+	template_path = os.path.join("acalc", "static", "templates")
+	
+jinja_env = Environment(loader=FileSystemLoader(template_path))
 
 log = logging.getLogger(__name__)
 
@@ -16,7 +22,7 @@ def render_template(template, **kwargs):
     
 def six2dec(angle):
 	import re
-	pat = r"^(\d+)[\s](\d+)[' ]([\d.]*)['']?"
+	pat = r"^(\d+)[\s](\d+)[\s]([\d.]*)[\s]?"
 	angle_dec = 0 
 	r = re.compile(pat)
 	angle_match = r.match(angle)
@@ -27,4 +33,4 @@ def six2dec(angle):
 		grau, minuto, segundo = angle_match.groups()
 		angle_dec = float(grau) + float(minuto)/60 + float(segundo)/3600
 	
-	return angle_dec;
+	return angle_dec;	
