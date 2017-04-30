@@ -162,9 +162,9 @@ class P2300Page():
 		self._modo 		= str(kwargs.get('radio', None)).upper()
 		self._result 	= []
 		if self._b != None and self._m != None and self._modo != None:
-			self.p630 		= Pfauter630(modulo = self._m, beta = self._b, modo = self._modo, entradas = self._entradas)
-			self._result 	= self.p630.rodasdemuda()
-			self._razaot 	= self.p630._razao
+			self.p630 		= Pfauter2300(modulo = self._m, beta = self._b, modo = self._modo, entradas = self._entradas)
+			self._result 	= self.p2300.rodasdemuda()
+			self._razaot 	= self.p2300._razao
 			self._values 	= "<strong>Artigo:</strong> {} [n] [n]".format(self._artigo)
 			self._values 	= self._values+"<strong>Razão Teórica:</strong> {0:.12f}[n]<strong>Módulo:</strong> {1} mm".format(self._razaot, self._m)
 			if self._b != 0:

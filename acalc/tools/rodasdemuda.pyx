@@ -411,7 +411,7 @@ class Pfauter630 (object):
 		return result
 
 # modulo, entradas, modo ou beta
-class Pfauter630 (object):
+class Pfauter2300 (object):
 	def __init__ (self, **kwargs) :
 		self._name 			= 'pfauter2300'
 		self._modelo 		= 'P2300'
