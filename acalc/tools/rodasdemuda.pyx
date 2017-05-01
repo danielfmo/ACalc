@@ -15,10 +15,10 @@ class Rollete (object):
 		self._name 			= 'rollete'
 		self._modelo 		= 'Runderland 5A-4C'
 		self._conj_rodas 	= (27,28,30,30,32,33,35,36,38,39,40,40,40,42,42,44,45,46,48,48,50,51,52,53,54,55,56,57,58,59,60,60,60,61,62,63,64,65,67,68,70,71,72,73,74,75,76,79,82,83,84,86,89,93,94,96,97,100,105,107,108,110,120,127)
-		self._m 			= kwargs.get('modulo', None)
+		self._m 				= kwargs.get('modulo', None)
 		self._beta 			= kwargs.get('beta', 0)
 		self._beta 			= radians(six2dec(self._beta))
-		self._razao 		= self._m/4.5*cos(self._beta) 	#modulo e beta
+		self._razao 			= self._m/(4.5*cos(self._beta)) 	#modulo e beta
 		
 	def limites(self, *conjunto):
 		if len(conjunto) != 4:
@@ -255,10 +255,10 @@ class Pfauter251 (object):
 		self._name 			= 'pfauter251'
 		self._modelo 		= 'P251'
 		self._conj_rodas 	= (20,21,22,23,24,24,25,25,26,27,27,28,29,29,30,31,32,32,33,34,35,36,36,37,38,38,39,40,40,41,42,42,43,44,45,45,46,47,48,48,49,50,51,52,53,54,55,56,57,58,58,59,60,60,61,62,63,64,64,65,66,67,68,69,70,71,71,72,72,73,74,75,76,77,78,79,80,81,82,83,84,86,87,88,89,92,94,95,96,97,98,101,102,103,107,109,113,127)
-		self._m 			= kwargs.get('modulo', None)
+		self._m 				= kwargs.get('modulo', None)
 		self._beta 			= kwargs.get('beta', 0)
 		self._beta 			= radians(six2dec(self._beta))
-		self._zO			= kwargs.get('entradas', None)
+		self._zO				= kwargs.get('entradas', None)
 		self._modo 			= str(kwargs.get('modo', None)).upper()
 		if self._modo == 'DIFERENCIAL':
 			self._razao =(2.864789*sin(self._beta))/(self._m*self._zO)	#modulo, beta, entradas
