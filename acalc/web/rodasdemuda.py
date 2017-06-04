@@ -5,7 +5,7 @@ __date__	= '14 March 2017'
 
 import cherrypy
 from acalc.tools.common import  render_template
-from acalc.tools.rodasdemuda import Rollete, Reishauer, ReishauerDressage, Pfauter251, Pfauter630, Modul, Lindner, Heckert, Spiromatic
+from acalc.tools.rodasdemuda import *
 
 class RolletePage():
 	@cherrypy.expose
@@ -24,15 +24,15 @@ class RolletePage():
 			self._razaot 	= self._rollete._razao
 			self._values 	= "<strong>Artigo:</strong> {} [n] [n]".format(self._artigo)
 			self._values 	= self._values+"<strong>Razão Teórica:</strong> {0:.12f} [n]<strong>Módulo:</strong> {1} mm [n]<strong>Beta:</strong> {2}".format(self._razaot, self._m, self._b)
-			return render_template("rodas_rollete.html", 
-				modulo 		= self._m, 
-				beta 		= self._b, 
+			return render_template("rodas_rollete.html",
+				modulo 		= self._m,
+				beta 		= self._b,
 				resultados 	= self._result,
 				artigo 		= self._artigo,
 				values 		= self._values)
 		else:
-			return self.index()		
-			
+			return self.index()
+
 class ReishauerPage():
 	@cherrypy.expose
 	def index(self):
@@ -51,15 +51,15 @@ class ReishauerPage():
 			self._razaot 	= self.reishauer._razao
 			self._values 	= "<strong>Artigo:</strong> {} [n] [n]".format(self._artigo)
 			self._values 	= self._values+"<strong>Razão Teórica:</strong> {0:.12f} [n]<strong>Módulo:</strong> {1} mm [n]<strong>Beta:</strong> {2}[n]<strong>Sentido:</strong> {3}".format(self._razaot, self._m, self._b, self._sentido)
-			return render_template("rodas_reishauer.html", 
-				modulo 		= self._m, 
-				beta 		= self._b, 
+			return render_template("rodas_reishauer.html",
+				modulo 		= self._m,
+				beta 		= self._b,
 				resultados 	= self._result,
 				artigo 		= self._artigo,
 				values 		= self._values)
 		else:
-			return self.index()	
-		
+			return self.index()
+
 class DressagePage():
 	@cherrypy.expose
 	def index(self):
@@ -76,14 +76,14 @@ class DressagePage():
 			self._razaot 	= self.dressage._razao
 			self._values 	= "<strong>Artigo:</strong> {} [n] [n]".format(self._artigo)
 			self._values 	= self._values+"<strong>Razão Teórica:</strong> {0:.12f} [n]<strong>Módulo:</strong> {1} mm".format(self._razaot, self._m)
-			return render_template("rodas_dressage.html", 
-				modulo 		= self._m, 
+			return render_template("rodas_dressage.html",
+				modulo 		= self._m,
 				resultados 	= self._result,
 				artigo 		= self._artigo,
 				values 	= self._values)
 		else:
-			return self.index()	
-		
+			return self.index()
+
 class P251Page():
 	@cherrypy.expose
 	def index(self):
@@ -106,16 +106,16 @@ class P251Page():
 			if self._b != 0:
 				self._values = self._values+"[n]<strong>Beta:</strong> {}".format(self._b)
 			self._values 	= self._values+"[n]<strong>Entradas:</strong> {}[n]<strong>Modo:</strong> {}".format(self._entradas, self._modo)
-			return render_template("rodas_p251.html", 
-				modulo 		= self._m, 
-				beta 		= self._b, 
-				entradas 	= self._entradas, 
+			return render_template("rodas_p251.html",
+				modulo 		= self._m,
+				beta 		= self._b,
+				entradas 	= self._entradas,
 				resultados 	= self._result,
 				artigo 		= self._artigo,
 				values 		= self._values)
 		else:
-			return self.index()	
-		
+			return self.index()
+
 class P630Page():
 	@cherrypy.expose
 	def index(self):
@@ -138,15 +138,15 @@ class P630Page():
 			if self._b != 0:
 				self._values = self._values+"[n]<strong>Beta:</strong> {}".format(self._b)
 			self._values 	= self._values+"[n]<strong>Entradas:</strong> {}[n]<strong>Modo:</strong> {}".format(self._entradas, self._modo)
-			return render_template("rodas_p630.html", 
-				modulo 		= self._m, 
-				beta 		= self._b, 
-				entradas 	= self._entradas, 
+			return render_template("rodas_p630.html",
+				modulo 		= self._m,
+				beta 		= self._b,
+				entradas 	= self._entradas,
 				resultados 	= self._result,
 				artigo 		= self._artigo,
 				values 		= self._values)
 		else:
-			return self.index()	
+			return self.index()
 
 class P2300Page():
 	@cherrypy.expose
@@ -162,7 +162,7 @@ class P2300Page():
 		self._modo 		= str(kwargs.get('radio', None)).upper()
 		self._result 	= []
 		if self._b != None and self._m != None and self._modo != None:
-			self.p630 		= Pfauter2300(modulo = self._m, beta = self._b, modo = self._modo, entradas = self._entradas)
+			self.p2300 		= Pfauter2300(modulo = self._m, beta = self._b, modo = self._modo, entradas = self._entradas)
 			self._result 	= self.p2300.rodasdemuda()
 			self._razaot 	= self.p2300._razao
 			self._values 	= "<strong>Artigo:</strong> {} [n] [n]".format(self._artigo)
@@ -170,16 +170,16 @@ class P2300Page():
 			if self._b != 0:
 				self._values = self._values+"[n]<strong>Beta:</strong> {}".format(self._b)
 			self._values 	= self._values+"[n]<strong>Entradas:</strong> {}[n]<strong>Modo:</strong> {}".format(self._entradas, self._modo)
-			return render_template("rodas_p630.html", 
-				modulo 		= self._m, 
-				beta 		= self._b, 
-				entradas 	= self._entradas, 
+			return render_template("rodas_p630.html",
+				modulo 		= self._m,
+				beta 		= self._b,
+				entradas 	= self._entradas,
 				resultados 	= self._result,
 				artigo 		= self._artigo,
 				values 		= self._values)
 		else:
-			return self.index()	
-			
+			return self.index()
+
 class ModulPage():
 	@cherrypy.expose
 	def index(self):
@@ -202,16 +202,16 @@ class ModulPage():
 			if self._b != 0:
 				self._values = self._values+"[n]<strong>Beta:</strong> {}".format(self._b)
 			self._values 	= self._values+"[n]<strong>Entradas:</strong> {}[n]<strong>Modo:</strong> {}".format(self._entradas, self._modo)
-			return render_template("rodas_modul.html", 
-				modulo 		= self._m, 
-				beta 		= self._b, 
-				entradas 	= self._entradas, 
+			return render_template("rodas_modul.html",
+				modulo 		= self._m,
+				beta 		= self._b,
+				entradas 	= self._entradas,
 				resultados 	= self._result,
 				artigo 		= self._artigo,
 				values 		= self._values)
 		else:
-			return self.index()	
-		
+			return self.index()
+
 class LindnerPage():
 	@cherrypy.expose
 	def index(self):
@@ -229,15 +229,15 @@ class LindnerPage():
 			self._razaot = self.lindner._razao
 			self._values = "<strong>Artigo:</strong> {} [n] [n]".format(self._artigo)
 			self._values 	= self._values+"<strong>Razão Teórica:</strong> {0:.12f}[n]<strong>Módulo:</strong> {1} mm[n]<strong>Entradas:</strong> {2}".format(self._razaot, self._m, self._entradas)
-			return render_template("rodas_lindner.html", 
-				modulo 		= self._m, 
-				entradas 	= self._entradas, 
+			return render_template("rodas_lindner.html",
+				modulo 		= self._m,
+				entradas 	= self._entradas,
 				resultados 	= self._result,
 				artigo 		= self._artigo,
 				values 		= self._values)
 		else:
-			return self.index()	
-		
+			return self.index()
+
 class HeckertPage():
 	@cherrypy.expose
 	def index(self):
@@ -255,15 +255,15 @@ class HeckertPage():
 			self._razaot = self.heckert._razao
 			self._values = "<strong>Artigo:</strong> {} [n] [n]".format(self._artigo)
 			self._values 	= self._values+"<strong>Razão Teórica:</strong> {0:.12f}[n]<strong>Módulo:</strong> {1} mm[n]<strong>Entradas:</strong> {2}".format(self._razaot, self._m, self._entradas)
-			return render_template("rodas_heckert.html", 
+			return render_template("rodas_heckert.html",
 				modulo 		= self._m,
-				entradas 	= self._entradas, 				
+				entradas 	= self._entradas,
 				resultados 	= self._result,
 				artigo 		= self._artigo,
 				values 		= self._values)
 		else:
-			return self.index()	
-		
+			return self.index()
+
 class SpiromaticPage():
 	@cherrypy.expose
 	def index(self):
@@ -281,16 +281,16 @@ class SpiromaticPage():
 				self._result 	= self.spiromatic.rodasdemuda6()
 			elif self._modo == "4rodas":
 				self._result 	= self.spiromatic.rodasdemuda()
-			
+
 			self._values 	= "<strong>Artigo:</strong> {} [n] [n]".format(self._artigo)
 			self._values 	= self._values+"<strong>Razão Teórica:</strong> {0:.12f}".format(self._w)
-			return render_template("rodas_spiromatic.html", 
-									razao 			= self._w, 
+			return render_template("rodas_spiromatic.html",
+									razao 			= self._w,
 									resultados 	= self._result,
 									artigo 		= self._artigo,
 									values 		= self._values)
 		else:
-			return self.index()	
+			return self.index()
 
 
 
@@ -306,10 +306,9 @@ class RodasPage:
 		self.lindner		= LindnerPage()
 		self.heckert	= HeckertPage()
 		self.spiromatic	= SpiromaticPage()
-	
+
 	@cherrypy.expose
 	def index(self):
 		return render_template("rodasdemuda.html")
-		
-		
-	
+
+
