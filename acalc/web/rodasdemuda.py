@@ -170,7 +170,7 @@ class P2300Page():
 			if self._b != 0:
 				self._values = self._values+"[n]<strong>Beta:</strong> {}".format(self._b)
 			self._values 	= self._values+"[n]<strong>Entradas:</strong> {}[n]<strong>Modo:</strong> {}".format(self._entradas, self._modo)
-			return render_template("rodas_p630.html",
+			return render_template("rodas_p2300.html",
 				modulo 		= self._m,
 				beta 		= self._b,
 				entradas 	= self._entradas,
