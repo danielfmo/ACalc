@@ -664,7 +664,7 @@ class Heckert (object):
 		self._conj_rodas	= (20,20,21,22,24,25,27,30,34,35,36,38,40,44,45,46,46,47,48,50,51,52,54,55,56,58,60,62,65,68,70,75,80,85,90,95,100,120,127)	
 		self._m 			= kwargs.get('modulo', None)
 		self._zO			= kwargs.get('entradas', None)
-		if (self._m*pi*self._z0)<=40:
+		if (self._m*pi*self._zO)<=40:
 			self._razao = (self._m*self._zO*47)/(6*95)			
 		else :
 			self._razao = (self._m*self._zO*47)/(40*95)			
