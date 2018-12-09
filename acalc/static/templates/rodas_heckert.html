@@ -4,7 +4,7 @@
 
 {% block content %}
 	<div div class="box">
-		<h2 id = "name_filter">Heckert ZFWG 250</h2>	
+		<h2 id = "name_filter">Heckert ZFWVG 250</h2>
 	</div>
 	<form method="GET" action="result">
 	<div class="box" id="content-box1">
@@ -14,21 +14,21 @@
 				<td><input type="text" name="artigo" value="{{ artigo }}"></input></td>
 			</tr>
 			<tr>
-				<th>Módulo Axial (mm)</th>
+				<th>Módulo Axial (Max)</th>
 				<td><input type="text" name="modulo" class = "required" value="{{ modulo }}"></input>	</td>
 			</tr>
 			<tr>
 				<th>Nº Entradas</th>
 				<td><input type="text" name="entradas" class = "required" value="{{ entradas }}"></input></td>
-			</tr>	
-		</table>	
+			</tr>
+		</table>
 	</div>
 
-	<div class="box" id="content-box2">	
+	<div class="box" id="content-box2">
 		<input type="submit" value="Calcular"></input>
 	</div>
 	</form>
-	<br class="clearfix" />	
+	<br class="clearfix" />
 	{% include 'rodas_result.html' %}
-	
+
 {% endblock %}

@@ -4,7 +4,7 @@
 
 {% block content %}
 	<div class="box">
-		<h2 id = "name_filter">Rollet</h2>	
+		<h2 id = "name_filter">Rollet</h2>
 	</div>
 	<form method="GET" action="result">
 	<div class="box" id="content-box1">
@@ -12,22 +12,22 @@
 			<tr>
 				<th>Artigo</th>
 				<td><input type="text" name="artigo" value="{{ artigo }}"></input></td>
-			</tr>	
+			</tr>
 			<tr>
-				<th>Módulo (mm)</th>
+				<th>Módulo (Mn)</th>
 				<td><input type="text" name="modulo" class = "required" value="{{ modulo }}"></input></td>
-			</tr>	
+			</tr>
 			<tr>
-				<th>Beta (º)</th>
+				<th>Beta (&deg;)</th>
 				<td><input type="text" name="beta" class = "required" value="{{ beta }}"></input></td>
-			</tr>			
-		</table>	
+			</tr>
+		</table>
 	</div>
-	<div class="box" id="content-box2">	
+	<div class="box" id="content-box2">
 		<input type="submit" value="Calcular"></input>
 	</div>
 	</form>
-	<br class="clearfix" />	
+	<br class="clearfix" />
 	{% include 'rodas_result.html' %}
-	
+
 {% endblock %}

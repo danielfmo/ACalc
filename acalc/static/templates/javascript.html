@@ -11,7 +11,7 @@
 <script type="text/javascript" src="/static/js/jquery.dropotron-1.2.js"		></script>
 
 <script type="text/javascript">
-	$(document).ready(function() 
+	$(document).ready(function()
 		{
 			// Funções auxiliares
 			function getDate()
@@ -21,19 +21,19 @@
 				var mm = today.getMonth()+1; //January is 0!
 				var yyyy = today.getFullYear();
 				if(dd<10){dd='0'+dd} if(mm<10){mm='0'+mm} today = yyyy+mm+dd;
-				
+
 				return today;
 			}
 			function getName()
 			{
 				var name = $("#name_filter").text();
-				
+
 				return name;
 			}
 			function getValues()
 			{
 				var values = $("#values_filter").text();
-				
+
 				return values;
 			}
 			function getFileName()
@@ -43,8 +43,8 @@
 				var fileName = docDate+"_"+filter;
 
 				return fileName;
-			}	
-			
+			}
+
 			// MENU
 			$('#menu > ul').dropotron(
 			{
@@ -55,50 +55,50 @@
 
 			//checkbox
 			$( "input[type=checkbox]" ).button().css({ width: '50px', 'float':'left'});
-			
+
 			$( "input[id=a_auto]:checkbox" ).change(function() {
 				if ($(this).is(':checked')) {
 					$("input[name=esfera]").attr("disabled", "disabled").addClass("ui-state-disabled");
 					$("input[name=esfera]").val(0);
 				} else {
 					$("input[name=esfera]").removeAttr("disabled").removeClass("ui-state-disabled");
-				}				
-			});	
-			
+				}
+			});
+
 			$( "input[id=beta_auto]:checkbox" ).change(function() {
 				if ($(this).is(':checked')) {
 					$("input[name=betas]").attr("disabled", "disabled").addClass("ui-state-disabled");
 					$("input[name=betas]").val(0);
 				} else {
 					$("input[name=betas]").removeAttr("disabled").removeClass("ui-state-disabled");
-				}				
+				}
 			});
-			
+
 			$( "input[id=dentes_ek1_auto]:checkbox" ).change(function() {
 				if ($(this).is(':checked')) {
 					$("input[name=dentes_ek1]").attr("disabled", "disabled").addClass("ui-state-disabled");
 					$("input[name=dentes_ek1]").val(0);
 				} else {
 					$("input[name=dentes_ek1]").removeAttr("disabled").removeClass("ui-state-disabled");
-				}				
+				}
 			});
-						
+
 			$( "input[id=dentes_ek2_auto]:checkbox" ).change(function() {
 				if ($(this).is(':checked')) {
 					$("input[name=dentes_ek2]").attr("disabled", "disabled").addClass("ui-state-disabled");
 					$("input[name=dentes_ek2]").val(0);
 				} else {
 					$("input[name=dentes_ek2]").removeAttr("disabled").removeClass("ui-state-disabled");
-				}				
+				}
 			});
-			
+
 			$( "input[id=eef_auto]:checkbox" ).change(function() {
 				if ($(this).is(':checked')) {
 					$("input[name=eef]").attr("disabled", "disabled").addClass("ui-state-disabled");
 					$("input[name=eef]").val(0);
 				} else {
 					$("input[name=eef]").removeAttr("disabled").removeClass("ui-state-disabled");
-				}				
+				}
 			});
 
 			$( "input[id=ek1_fix]:checkbox" ).change(function() {
@@ -106,7 +106,7 @@
 					$("input[name=ek1]").addClass("ui-state-disabled");
 				} else {
 					$("input[name=ek1]").removeClass("ui-state-disabled");
-				}				
+				}
 			});
 
 			$( "input[id=ek2_fix]:checkbox" ).change(function() {
@@ -114,21 +114,21 @@
 					$("input[name=ek2]").addClass("ui-state-disabled");
 				} else {
 					$("input[name=ek2]").removeClass("ui-state-disabled");
-				}				
+				}
 			});
-						
+
 			//submit
 			$( "input[type=submit]" ).button().attr("disabled", "disabled").addClass("ui-state-disabled");
-			
+
 			//input text
 			$( "input[type=text]" ).button().off('mousedown').css({ width: '100px', 'float':'left'});
-			
+
 			$( "input[type=text]" ).change(function() {
 				var isFormValid = true;
 				$( ".required:input[type=text]" ).each(function(index, value) {
-					if ( !$.trim($(value).val()).match(/[0-9]+/) ) { 
+					if ( !$.trim($(value).val()).match(/[0-9]+/) ) {
 						isFormValid = false;
-					}	
+					}
 				});
 				if (isFormValid) {
 					$("input[type=submit]").removeAttr("disabled").removeClass("ui-state-disabled");
@@ -136,19 +136,20 @@
 					$("input[type=submit]").attr("disabled", "disabled").addClass("ui-state-disabled");
 				}
 			});
-		
+
 			// radio
 			$( ".radio" ).buttonset();
-	
-			$( ".radio" ).click(function() {
-				if ( $('input[name=radio]:radio:checked').val() == 'navalhao'  ||  $('input[name=radio1]:radio:checked').val() == 'RECTO'){
-					$("input[name=beta]").attr("disabled", "disabled").addClass("ui-state-disabled");
-					$("input[name=beta]").val(0);
-				} else {
-					$("input[name=beta]").removeAttr("disabled").removeClass("ui-state-disabled");
-				}				
-			});
-			
+
+			// Remove condition for "navalhao" beta must a be always required.
+			// $( ".radio" ).click(function() {
+			// 	if ( $('input[name=radio]:radio:checked').val() == 'navalhao'  ||  $('input[name=radio1]:radio:checked').val() == 'RECTO'){
+			// 		$("input[name=beta]").attr("disabled", "disabled").addClass("ui-state-disabled");
+			// 		$("input[name=beta]").val(0);
+			// 	} else {
+			// 		$("input[name=beta]").removeAttr("disabled").removeClass("ui-state-disabled");
+			// 	}
+			// });
+
 			// table
 			$('#result-table').dataTable(
 			{
@@ -162,10 +163,10 @@
 				"bInfo": 			false,
 				"bJQueryUI": 		true,
 				"bAutoWidth": 		true,
-				"bRetrieve": 		true,	
+				"bRetrieve": 		true,
 				"oTableTools": 		{
 					"sSwfPath": "/static/swf/ZeroClipboard.swf",
-					"aButtons": 
+					"aButtons":
 					[
 						{
 							"sExtends": "pdf",
@@ -178,7 +179,7 @@
 								flash.setFileName( customName );
 								this.fnSetText( flash,
 									"title:"+ this.fnGetTitle(oConfig) +"\n"+
-									"message:"+ oConfig.sPdfMessage +"\n"+ 
+									"message:"+ oConfig.sPdfMessage +"\n"+
 									"colWidth:"+ this.fnCalcColRatios(oConfig) +"\n"+
 									"orientation:"+ oConfig.sPdfOrientation +"\n"+
 									"size:"+ oConfig.sPdfSize +"\n"+
@@ -190,6 +191,6 @@
 					]
 				}
 			} );
-			
+
 		});
 </script>
